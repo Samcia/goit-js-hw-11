@@ -1,35 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GoIT JavaScript Homework 11</title>
-    <link rel="stylesheet" href="./css/styles.css" />
-    <script type="module" src="./index.js"></script>
+    <title>GoIT-JS-HW11</title>
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
-
   <body>
-    <main>
-      <section class="form-section">
-        <form class="search-form" id="search-form">
-          <input
-            class="search-input"
-            type="text"
-            name="searchQuery"
-            autocomplete="off"
-            placeholder="Search images..."
-          />
-          <button type="submit" class="btn-search">
-            <svg width="10" height="10">
-              <use href="./img/sprite.svg#icon-search"></use>
-            </svg>
-          </button>
-        </form>
-      </section>
-      <section class="gallery-section">
+    <div class="container">
+      <form class="search-form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+        <button type="submit">Search</button>
+      </form>
+      <div class="gallery-container">
         <div class="gallery"></div>
-        <div class="guard"></div>
-      </section>
-    </main>
+        <button type="button" class="btn-load-more is-hidden">LOAD MORE</button>
+      </div>
+    </div>
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>
