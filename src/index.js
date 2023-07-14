@@ -1,26 +1,25 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-import { getGallery, totalPages } from "./js/api-set";
-import { scroll } from "./js/scroll";
-import { createGalleryItem } from "./js/createMarkup";
-import Notiflix from "notiflix";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import { getGallery, totalPages } from './js/api-set';
+import { scroll } from './js/scroll';
+import { createGalleryItem } from './js/createMarkup';
+import Notiflix from 'notiflix';
 
-const form = document.querySelector("#search-form");
-const gallery = document.querySelector(".gallery");
-const guard = document.querySelector(".guard");
-let query = "";
+const form = document.querySelector('#search-form');
+const gallery = document.querySelector('.gallery');
+const guard = document.querySelector('.guard');
+let query = '';
 let page = 1;
-const lightbox = new SimpleLightbox(".gallery a");
+const lightbox = new SimpleLightbox('.gallery a');
 const options = {
   root: null,
-  rootMargin: "100px",
+  rootMargin: '100px',
   threshold: 0,
 };
-
 const observer = new IntersectionObserver(onPagination, options);
 
-form.addEventListener("change", onInput);
-form.addEventListener("submit", onSubmit);
+form.addEventListener('change', onInput);
+form.addEventListener('submit', onSubmit);
 
 const addGallerySubmit = async () => {
   try {
@@ -52,30 +51,30 @@ const addGalleryPag = async () => {
   }
 };
 
-const onInput = (evt) => {
+const onInput = evt => {
   query = evt.target.value.trim();
   return query;
 };
 
-const onSubmit = (evt) => {
+const onSubmit = evt => {
   evt.preventDefault();
   page = 1;
-  gallery.innerHTML = "";
+  gallery.innerHTML = '';
 
   if (!evt.target.elements.searchQuery.value) {
-    Notiflix.Notify.failure("Please, enter a search query");
+    Notiflix.Notify.failure('Please, enter a search query');
   } else {
     addGallerySubmit();
   }
 };
 
-const addImages = (response) => {
+const addImages = response => {
   const images = response.data.hits;
 
   if (!images.length) {
-    gallery.innerHTML = "";
+    gallery.innerHTML = '';
     Notiflix.Notify.failure(
-      "Sorry, there are no images matching your search query. Please try again."
+      'Sorry, there are no images matching your search query. Please try again.'
     );
   } else {
     createGalleryItem(images);
@@ -85,9 +84,8 @@ const addImages = (response) => {
     lightbox.refresh();
   }
 };
-
-const onPagination = (entries, observer) => {
-  entries.forEach((entry) => {
+function onPagination(entries, observer) {
+  entries.forEach(entry => {
     console.log(entry);
     if (entry.isIntersecting) {
       page += 1;
@@ -97,6 +95,6 @@ const onPagination = (entries, observer) => {
       }
     }
   });
-};
+}
 
 export { gallery };
